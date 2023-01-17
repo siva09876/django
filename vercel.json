@@ -1,28 +1,17 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "student/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    },
-    {
-      "src": "build.sh",
-      "use": "@vercel/static-build",
-      "config": "staticfiles_build"
-    },
-    {
-  "buildCommand": "next build"
+"application": "django",
+"build": {
+"script": "./build.sh"
+},
+"deployment": {
+"type": "django",
+"config": {
+"settings": "student.settings.production",
+"requirements": "requirements.txt",
+"migrations": true,
+"static_files": true,
+"media_files": true
 }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "student/wsgi.py"
-    }
-  ]
 }
+}
+
